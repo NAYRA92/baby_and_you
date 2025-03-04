@@ -1,4 +1,5 @@
 import 'package:baby_and_you/constants.dart';
+import 'package:baby_and_you/home_page.dart';
 import 'package:flutter/material.dart';
 
 class OnboardingPage extends StatefulWidget {
@@ -17,6 +18,7 @@ class _OnboardingPageState extends State<OnboardingPage> {
     return Scaffold(
       body: PageView.builder(
           controller: _pageController,
+          physics: ScrollPhysics(),
           itemCount: pages.length,
           onPageChanged: (int page) {
             setState(() {
@@ -65,6 +67,10 @@ class _OnboardingPageState extends State<OnboardingPage> {
                           : SizedBox(),
                       TextButton(
                         onPressed: () {
+                          _activePage == 2 ? 
+                          Navigator.push(
+                            context, 
+                            MaterialPageRoute(builder: (context) => HomePage())) :
                           onNextPage();
                         },
                         child: Text(

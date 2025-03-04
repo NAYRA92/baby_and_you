@@ -21,7 +21,7 @@ class _ChatScreenState extends State<ChatScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: ChatWidget(apiKey: _apiKey, ),
+      body: ChatWidget(apiKey: _apiKey,),
     );
   }
 }
@@ -41,12 +41,14 @@ class ChatWidget extends StatefulWidget {
 
 class _ChatWidgetState extends State<ChatWidget> {
   late final GenerativeModel _model;
+  late final GenerativeModel _helloModel;
   late final ChatSession _chat;
   final ScrollController _scrollController = ScrollController();
   final TextEditingController _textController = TextEditingController();
   final FocusNode _textFieldFocus = FocusNode();
   final List<({Image? image, String? text, bool fromUser})> _generatedContent =
       <({Image? image, String? text, bool fromUser})>[];
+  final List<String> _generatedGreetingMessage = <String>[];
   bool _loading = false;
   String contentToCopy = "";
 
@@ -63,7 +65,7 @@ class _ChatWidgetState extends State<ChatWidget> {
                       decoration: InputDecoration(
                         hintText: "How can I help you?",
                         hintStyle: TextStyle(
-                        color: kLight_green,
+                        color: kHoneydew,
                         fontSize: 14,
                         fontWeight: FontWeight.w300,),
                         fillColor: kFern_green,
@@ -186,7 +188,7 @@ class _ChatWidgetState extends State<ChatWidget> {
                
                 
                 if (!_loading)
-                  IconButton(
+                  _generatedContent.isEmpty ? Container() : IconButton(
                     onPressed: () async {
                       _sendChatMessage(chatTextCont.text);
                     },
@@ -235,6 +237,40 @@ class _ChatWidgetState extends State<ChatWidget> {
       });
     } finally {
       _textController.clear();
+      setState(() {
+        _loading = false;
+      });
+      _textFieldFocus.requestFocus();
+    }
+  }
+
+  
+  Future<void> _greetingMessage(String message) async {
+   
+    try {
+      _generatedGreetingMessage.add((message));
+      final response = await _chat.sendMessage(
+        Content.text(message),
+      );
+      final text = response.text;
+      _generatedGreetingMessage.add((text!));
+
+      if (text == null) { //this should be replaying null
+        _showError('No response from API.');
+        return;
+      } else {
+        setState(() {
+          _loading = false;
+          _scrollDown();
+        });
+      }
+    } catch (e) {
+      _showError(e.toString());
+      setState(() {
+        _loading = false;
+      });
+    } finally {
+      // _textController.clear();
       setState(() {
         _loading = false;
       });
