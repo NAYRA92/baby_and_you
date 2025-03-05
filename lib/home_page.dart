@@ -29,11 +29,11 @@ class _HomePageState extends State<HomePage> {
           TextPart(
               'You are an assistant for women in pregnant and after birth'),
           TextPart(
-              'You create a random greeting message with maximum of 3 words to encourage and cheer up them'),
+              'You create a random greeting message of two lines to encourage and cheer up them'),
           TextPart('You are creating a new phrase everytime.'),
         ]));
     _chat = _helloModel.startChat();
-    _greetingMessage("A random greeing message, with an emoji");
+    _greetingMessage("A greeing message, with more than one emoji emoji");
   }
 
   @override
@@ -63,50 +63,92 @@ class _HomePageState extends State<HomePage> {
           ),
           Expanded(
             flex: 1,
-            child: ListView(//shift and mouse wheel to scroll horizontaly
-              scrollDirection: Axis.horizontal,
-              itemExtent: 350, children: [
-              linearListContainer("BABY CARE CENTERS","baby_care", kFern_green,(){
-                launchUrl(Uri.parse("https://www.google.com/maps/search/hospital/@12.9889975,44.9170525,12z"));
-              }),
-              linearListContainer("HEALTHY TIPS","food_tips", kFern_green,(){
-                launchUrl(Uri.parse("https://www.nhs.uk/live-well/eat-well/how-to-eat-a-balanced-diet/eight-tips-for-healthy-eating/"));
-              }),
-              linearListContainer("MOMS COMMUNITY","mom_community", kFern_green,(){
-                launchUrl(Uri.parse("https://www.themom.co/home"));
-              }),
-            ]),
+            child: CarouselView(
+                //shift and mouse wheel to scroll horizontaly
+                scrollDirection: Axis.horizontal,
+                onTap: (value) {
+                  value == 0
+                      ? launchUrl(Uri.parse(
+                          "https://www.google.com/maps/search/hospital/@12.9889975,44.9170525,12z"))
+                      : value == 1
+                          ? launchUrl(Uri.parse(
+                              "https://www.nhs.uk/live-well/eat-well/how-to-eat-a-balanced-diet/eight-tips-for-healthy-eating/"))
+                          : value == 2
+                              ? launchUrl(
+                                  Uri.parse("https://www.themom.co/home"))
+                              : null;
+                },
+                itemExtent: 400,
+                children: [
+                  linearListContainer("BABY CARE CENTERS", "baby_care",
+                      kHoneydew, kFern_green, () {}),
+                  linearListContainer("HEALTHY TIPS", "food_tips", kHoneydew,
+                      kFern_green, () {}),
+                  linearListContainer("MOMS COMMUNITY", "mom_community",
+                      kHoneydew, kFern_green, () {}),
+                ]),
           ),
-          Divider(thickness: 1.5, indent: 30, endIndent: 30,),
-          Expanded(
-            flex: 3,
-            child: ListView(
+          Divider(
+            thickness: 1.5,
+            indent: 30,
+            endIndent: 30,
+          ),
+          Padding(
+            padding: const EdgeInsets.all(15.0),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Container(
-                  height: 200,
-                  child: Row(
-                    children: [
-                      Expanded(
-                        child: linearListContainer("CHANGE FOR BABY","change_baby", const Color.fromARGB(255, 122, 26, 58),(){
-                                        launchUrl(Uri.parse("https://youtu.be/cDa2BTZppUc?si=DHJKrvnfPd5d4idW"));
-                                      }),
-                      ),
-                  Expanded(
-                    child: linearListContainer("MOMS COMMUNITY","mom_community", kFern_green,(){
-                      launchUrl(Uri.parse("https://www.themom.co/home"));
-                    }),
-                  ),
-                    ],
-                  ),
+                Text(
+                  "mommy tips 👶",
+                  style: TextStyle(fontSize: 34),
                 ),
-                Container(
-                  height: 300,
-                  child: linearListContainer("MOMS COMMUNITY","mom_community", kFern_green,(){
-                    launchUrl(Uri.parse("https://www.themom.co/home"));
-                  }),
+                Text(
+                  "Youtube Videos",
+                  style: TextStyle(fontSize: 24),
                 ),
               ],
-            ))
+            ),
+          ),
+          Expanded(
+              flex: 3,
+              child: ListView(
+                children: [
+                  Container(
+                    height: 200,
+                    child: Row(
+                      children: [
+                        Expanded(
+                          child: linearListContainer(
+                              "CHANGE FOR BABY",
+                              "change_baby",
+                              const Color.fromARGB(255, 122, 26, 58),
+                              kHoneydew, () {
+                            launchUrl(Uri.parse(
+                                "https://youtu.be/cDa2BTZppUc?si=DHJKrvnfPd5d4idW"));
+                          }),
+                        ),
+                        Expanded(
+                          child: linearListContainer(
+                              "BABY FEEDING",
+                              "feed_baby",
+                              const Color.fromARGB(255, 122, 80, 26),
+                              kHoneydew, () {
+                            launchUrl(Uri.parse(
+                                "https://www.youtube.com/watch?v=7k6kNaUb79Q"));
+                          }),
+                        ),
+                      ],
+                    ),
+                  ),
+                  Container(
+                    height: 200,
+                    child: linearListContainer("BABY FIRST AID",
+                        "first_aid", kFern_green, kHoneydew, () {
+                      launchUrl(Uri.parse("https://www.youtube.com/watch?v=uZYptqxfZ1E"));
+                    }),
+                  ),
+                ],
+              ))
         ],
       ),
       floatingActionButton: FloatingActionButton(
@@ -139,7 +181,11 @@ class _HomePageState extends State<HomePage> {
               Icons.assistant,
               color: kHoneydew,
             ),
-            Text("GET HELP", style: TextStyle(fontSize: 11, color: kHoneydew, fontWeight: FontWeight.bold),)
+            Text(
+              "GET HELP",
+              style: TextStyle(
+                  fontSize: 11, color: kHoneydew, fontWeight: FontWeight.bold),
+            )
           ],
         ),
       ),
@@ -180,33 +226,26 @@ class _HomePageState extends State<HomePage> {
     }
   }
 
-Widget linearListContainer(
-  String title,
-  String image,
-  Color clr,
-  Function() fun
-){
-  return  GestureDetector(
-    onTap: fun,
-    child: Container(
-                  margin: EdgeInsets.all(5),
-                  decoration: BoxDecoration(
-                    color: clr,
-                    borderRadius: BorderRadius.circular(25),
-                    image: DecorationImage(
-                      image: AssetImage("assets/images/$image.jpg"),
-                      opacity: .3,
-                      fit: BoxFit.cover)
-                    ),
-                  child: Center(
-                      child: Text(
-                    title,
-                    textAlign: TextAlign.center,
-                    style: TextStyle(
-                      color: kHoneydew,
-                      fontSize: 34),
-                  )),
-                ),
-  );
-}
+  Widget linearListContainer(
+      String title, String image, Color clr, Color fontClr, Function() fun) {
+    return GestureDetector(
+      onTap: fun,
+      child: Container(
+        margin: EdgeInsets.all(5),
+        decoration: BoxDecoration(
+            color: clr,
+            borderRadius: BorderRadius.circular(25),
+            image: DecorationImage(
+                image: AssetImage("assets/images/$image.jpg"),
+                opacity: .3,
+                fit: BoxFit.cover)),
+        child: Center(
+            child: Text(
+          title,
+          textAlign: TextAlign.center,
+          style: TextStyle(color: fontClr, fontSize: 34),
+        )),
+      ),
+    );
+  }
 }
