@@ -30,7 +30,7 @@ class _OnboardingPageState extends State<OnboardingPage> {
               children: [
                 Container(
                   decoration: BoxDecoration(
-                      color: kHoneydew,
+                      color: kFern_green,
                       image: DecorationImage(
                           image: AssetImage(pages[index]["image"]),
                           opacity: .3,
@@ -41,7 +41,7 @@ class _OnboardingPageState extends State<OnboardingPage> {
                   child: Text(
                     pages[index]["description"],
                     style: TextStyle(
-                        color: kFern_green,
+                        color: kHoneydew,
                         fontWeight: FontWeight.bold,
                         fontSize: 38),
                   ),
@@ -76,7 +76,7 @@ class _OnboardingPageState extends State<OnboardingPage> {
                         child: Text(
                           _activePage < 2 ? "Next" : "Start",
                           style: TextStyle(
-                              color: kFern_green,
+                              color: kHoneydew,
                               fontWeight: FontWeight.bold,
                               fontSize: 12),
                         ),

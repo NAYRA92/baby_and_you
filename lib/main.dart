@@ -2,6 +2,7 @@ import 'package:baby_and_you/home_page.dart';
 import 'package:flutter/material.dart';
 
 import 'constants.dart';
+import 'logo_page.dart';
 import 'onboarding_page.dart';
 
 void main() {
@@ -16,12 +17,13 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Baby&You',
+      debugShowCheckedModeBanner: false,
       theme: ThemeData(
         fontFamily: "Ubuntu",
         colorScheme: ColorScheme.fromSeed(seedColor: kFern_green),
         useMaterial3: true,
       ),
-      home: OnboardingPage(),
+      home: LogoPage(),
     );
   }
 }

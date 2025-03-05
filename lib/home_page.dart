@@ -189,6 +189,30 @@ class _HomePageState extends State<HomePage> {
           ],
         ),
       ),
+      bottomNavigationBar: BottomAppBar(
+        height: 50,
+      color: kHoneydew,
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Text(
+            "Meet the app developer:",
+            textAlign: TextAlign.center,
+            style: TextStyle(
+              fontSize: 14
+            ),),
+            TextButton(
+              onPressed: (){
+                launchUrl(Uri.parse("https://linkedin.com/in/hashem92nayra"));
+              },
+            child: Text( "Nayra Hashem on LinkedIn",
+            textAlign: TextAlign.center,
+            style: TextStyle(
+              fontSize: 14
+            )),),
+        ],
+      ),
+    ),
     );
   }
 

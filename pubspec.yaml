@@ -38,6 +38,7 @@ dependencies:
   google_generative_ai:
   flutter_markdown:
   url_launcher:
+  animated_text_kit: ^4.2.3
 
 dev_dependencies:
   flutter_test:
@@ -81,6 +82,10 @@ flutter:
     - family: Ubuntu
       fonts:
         - asset: assets/fonts/Ubuntu-Regular.ttf
+
+    - family: Sigmar
+      fonts:
+        - asset: assets/fonts/Sigmar-Regular.ttf
 
   #   - family: Trajan Pro
   #     fonts:
