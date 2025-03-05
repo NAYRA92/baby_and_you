@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 
 import 'constants.dart';
 import 'logo_page.dart';
-import 'onboarding_page.dart';
 
 void main() {
   runApp(const MyApp());

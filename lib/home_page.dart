@@ -1,3 +1,4 @@
+import 'package:baby_and_you/mommy_location.dart';
 import 'package:flutter/material.dart';
 import 'package:google_generative_ai/google_generative_ai.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -29,7 +30,7 @@ class _HomePageState extends State<HomePage> {
           TextPart(
               'You are an assistant for women in pregnant and after birth'),
           TextPart(
-              'You create a random greeting message of two lines to encourage and cheer up them'),
+              'You create a random greeting message of two lines to encourage and cheer up them.'),
           TextPart('You are creating a new phrase everytime.'),
         ]));
     _chat = _helloModel.startChat();
@@ -39,37 +40,38 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(),
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Padding(
-            padding: const EdgeInsets.all(15.0),
+            padding: const EdgeInsets.only(top: 15.0, right: 15.0, left: 15.0),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  "Hello,",
-                  style: TextStyle(fontSize: 34),
+                  "For you 💝,",
+                  style: TextStyle(fontSize: 28),
                 ),
                 Text(
                   _generatedGreetingMessage.isEmpty
                       ? ""
                       : _generatedGreetingMessage.first!,
-                  style: TextStyle(fontSize: 24),
+                  style: TextStyle(fontSize: 18),
                 )
               ],
             ),
           ),
           Expanded(
-            flex: 1,
+            flex: 2,
             child: CarouselView(
                 //shift and mouse wheel to scroll horizontaly
                 scrollDirection: Axis.horizontal,
                 onTap: (value) {
                   value == 0
-                      ? launchUrl(Uri.parse(
-                          "https://www.google.com/maps/search/hospital/@12.9889975,44.9170525,12z"))
+                      ? 
+                      Navigator.push(context, MaterialPageRoute(builder: (context) => MommyLocation()))
+                      // launchUrl(Uri.parse(
+                      //     "https://www.google.com/maps/search/hospital/@12.9889975,44.9170525,12z"))
                       : value == 1
                           ? launchUrl(Uri.parse(
                               "https://www.nhs.uk/live-well/eat-well/how-to-eat-a-balanced-diet/eight-tips-for-healthy-eating/"))
@@ -94,23 +96,23 @@ class _HomePageState extends State<HomePage> {
             endIndent: 30,
           ),
           Padding(
-            padding: const EdgeInsets.all(15.0),
+            padding: const EdgeInsets.only(top: 15.0, right: 15.0, left: 15.0),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
                   "mommy tips 👶",
-                  style: TextStyle(fontSize: 34),
+                  style: TextStyle(fontSize: 28),
                 ),
                 Text(
                   "Youtube Videos",
-                  style: TextStyle(fontSize: 24),
+                  style: TextStyle(fontSize: 18),
                 ),
               ],
             ),
           ),
           Expanded(
-              flex: 3,
+              flex: 2,
               child: ListView(
                 children: [
                   Container(
@@ -255,6 +257,7 @@ class _HomePageState extends State<HomePage> {
     return GestureDetector(
       onTap: fun,
       child: Container(
+        height: 300,
         margin: EdgeInsets.all(5),
         decoration: BoxDecoration(
             color: clr,
