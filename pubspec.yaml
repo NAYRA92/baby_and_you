@@ -40,6 +40,7 @@ dependencies:
   url_launcher:
   animated_text_kit: ^4.2.3
   geolocator:
+  animations:
 
 dev_dependencies:
   flutter_test:

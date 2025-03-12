@@ -23,7 +23,7 @@ class _HomePageState extends State<HomePage> {
     // TODO: implement initState
     super.initState();
     _helloModel = GenerativeModel(
-        model: 'gemini-1.5-flash-latest',
+        model: 'gemini-2.0-flash-exp', //'gemini-1.5-flash-latest'
         apiKey: _apiKey,
         systemInstruction: Content("model", [
           // Add your system instructions here as a TextPart
