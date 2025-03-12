@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-String comaiCodeApi = "AIzaSyDBCO0OpTrF25pDsYWotJ5c3LZd36wfdUA";
+String comaiCodeApi = "Your_Google_Gemini_API";
 
 Color kHoneydew = Color(0xffE4F5DF);
 Color kFern_green = Color(0xff507944);
